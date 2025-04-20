@@ -1,25 +1,32 @@
 from typing import Optional
 from pydantic import BaseModel, ConfigDict
-from users import User
+from schemas.users import User
+from datetime import datetime
 
 class TaskStatus(BaseModel):
     model_config= ConfigDict(from_attributes=True)
-    id: Optional[int]
+    id: Optional[int] = None
     name: str
     description: Optional[str]
-    color: str = "#FFFFFF"  # Default color is white
-    created_at: str
-    updated_at: str
+    color: str = "#FFFFFF"  
+    created_at: Optional[datetime]= None
+    updated_at: Optional[datetime]= None
 
 class Task(BaseModel):
     model_config = ConfigDict(from_attributes=True)
-    id: Optional[int]
+    id: Optional[int] = None
     name: str
     description: Optional[str]
-    assigned_to: User
-    status_id: TaskStatus
-    due_date: str
-    created_at: str
-    updated_at: str
+    assigned_user: User
+    status: TaskStatus
+    due_date: Optional[datetime] = None
+    created_at: Optional[datetime]= None
+    updated_at: Optional[datetime]= None
+
+class CreateTask(BaseModel):
+    name: str
+    description: Optional[str] = None
+    status:Optional[str] =None
+    due_date:Optional[datetime] = None
 
 
