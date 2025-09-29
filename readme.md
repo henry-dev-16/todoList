@@ -1,4 +1,5 @@
 # Todo Application - FastAPI + PostgreSQL
+
 https://roadmap.sh/projects/todo-list-api
 
 A RESTful API for task management built with FastAPI, PostgreSQL, and SQLAlchemy. Features user authentication with JWT tokens and comprehensive task management capabilities.
