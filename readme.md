@@ -1,4 +1,5 @@
 # Todo Application - FastAPI + PostgreSQL
+https://github.com/henry-dev-16/todoList
 
 A RESTful API for task management built with FastAPI, PostgreSQL, and SQLAlchemy. Features user authentication with JWT tokens and comprehensive task management capabilities.
 
@@ -209,13 +210,10 @@ pytest tests/
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## 📄 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## 👥 Authors
 
-- Your Name - Initial work
+- Henry Ortiz - Initial work
 
 ## 🙏 Acknowledgments
 
