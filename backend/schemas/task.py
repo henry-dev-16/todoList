@@ -15,7 +15,7 @@ class TaskStatus(BaseModel):
 class Task(BaseModel):
     model_config = ConfigDict(from_attributes=True)
     id: Optional[int] = None
-    name: str
+    title: str
     description: Optional[str]
     assigned_user: User
     status: TaskStatus
@@ -24,7 +24,7 @@ class Task(BaseModel):
     updated_at: Optional[datetime]= None
 
 class CreateTask(BaseModel):
-    name: str
+    title: str
     description: Optional[str] = None
     status:Optional[str] =None
     due_date:Optional[datetime] = None

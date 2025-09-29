@@ -30,13 +30,13 @@ class TaskTable(Base):
     __tablename__ = "task"
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True, index=True)
-    name: Mapped[str] = mapped_column(String(60),unique=True, index=True)
+    title: Mapped[str] = mapped_column(String(60),unique=True, index=True)
     description: Mapped[str]
     assigned_to: Mapped[int] = mapped_column(ForeignKey("users.id"))
     assigned_user: Mapped["UserTable"] = relationship("UserTable", back_populates="tasks")
     status_id: Mapped[Optional[int]] = mapped_column(ForeignKey("task_status.id"), nullable=True)
     status: Mapped[Optional["TaskStatusTable"]] = relationship(back_populates="task")
-    due_date: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    due_date: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
     create_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
     update_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=True)
 

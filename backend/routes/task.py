@@ -14,7 +14,14 @@ task = APIRouter(tags=["task"])
 
 
 def get_new_status(status, db):
-    return db.query(TaskStatusTable).filter(TaskStatusTable.name == status).first()
+    Status = db.query(TaskStatusTable).filter(TaskStatusTable.name == status).first() or db.query(TaskStatusTable).filter(TaskStatusTable.name == "new").first()
+    if not Status: 
+        new_status = {"name": "new", "description": "recently created"}
+        db.add(new_status)
+        db.commit()
+        db.refresh(new_status)
+        return new_status
+    return Status
 
 
 @task.get("/todos", response_model=List[Task])
@@ -24,7 +31,7 @@ def get_todos(user: User = Depends(get_current_user), db:Session = Depends(get_d
 
 @task.post("/todos", response_model=Task)
 def create_task(task:CreateTask,user: User = Depends(get_current_user), db:Session = Depends(get_db)):
-    exist = db.query(TaskTable).filter(TaskTable.name == task.name).first()
+    exist = db.query(TaskTable).filter(TaskTable.title == task.title).first()
     if not exist:
         new_task = task.model_dump()
         new_task.update({"create_at":datetime.now(timezone.utc), "assigned_user": user,"status":get_new_status(task.status, db)})
